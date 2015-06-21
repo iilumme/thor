@@ -1,6 +1,7 @@
 package thor.thor.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
@@ -65,7 +66,13 @@ public class DrawingPlatform extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        /*Background*/
         g.drawImage(this.pic, 0, 0, null);
+        
+        /*Ground*/
+        g.drawRect(0, 550, 1200, 20);
+        g.setColor(Color.ORANGE);
+        g.fillRect(0, 550, 1209, 20);
 
         this.game.getThor().draw(g);
         for (Obstacle obstacle : this.game.getObstacles()) {

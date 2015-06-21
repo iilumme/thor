@@ -35,7 +35,7 @@ public class Game extends Timer implements ActionListener {
         this.score = 0;
 
         addActionListener(this);
-        setInitialDelay(500);
+        setInitialDelay(200);
     }
 
     public Thor getThor() {

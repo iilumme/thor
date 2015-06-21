@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.swing.AbstractAction;
 import javax.swing.Timer;
 import thor.thor.character.Obstacle;
+import thor.thor.character.ObstacleLoki;
 
 /**
  * A thread which takes care of the obstacles.
@@ -17,7 +18,7 @@ public class ObstacleHandler extends Thread {
 
     public ObstacleHandler() {
         this.allObstacles = new ArrayList<>();
-        this.timer = new Timer(3000, new AbstractAction() {
+        this.timer = new Timer(4000, new AbstractAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -35,6 +36,11 @@ public class ObstacleHandler extends Thread {
                         obstacles.add(o);
                     }
                     y -= 50;
+
+                    if (i == 9) {
+                        Obstacle obstacle = new ObstacleLoki(1200, 0);
+                        obstacles.add(obstacle);
+                    }
                 }
 
                 ObstacleHandler.this.setObstacles(obstacles);

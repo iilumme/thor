@@ -15,7 +15,7 @@ public class PlayButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.manager.getDrawingPlatform().hideFirstPage();
-        this.manager.getDrawingPlatform().changeToAsgard();
+        this.manager.getDrawingPlatform().changeToJotunheim();
         this.manager.getUserInterface().playSetVisibleFalse();
         this.manager.getDrawingPlatform().setInfoPanelVisible();
         this.manager.startTimers();

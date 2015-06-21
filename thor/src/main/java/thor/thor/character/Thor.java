@@ -26,7 +26,9 @@ public class Thor {
     }
 
     public void move() {
-        this.y -= 30;
+        if (this.y > 0) {
+            this.y -= 30;
+        }
     }
 
     public void gravityMove() {
@@ -34,7 +36,7 @@ public class Thor {
     }
 
     public boolean hitTheGround() {
-        if (this.y == 500) {
+        if (this.y >= 550) {
             return true;
         }
 
