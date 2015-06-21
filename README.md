@@ -1,1 +1,3 @@
-# thor
+# Thor
+
+Flying Thor game
