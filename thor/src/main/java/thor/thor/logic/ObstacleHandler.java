@@ -17,7 +17,6 @@ public class ObstacleHandler extends Thread {
 
     public ObstacleHandler() {
         this.allObstacles = new ArrayList<>();
-//        this.timer = new Timer(3000, new ObstacleCreator(this));
         this.timer = new Timer(3000, new AbstractAction() {
 
             @Override

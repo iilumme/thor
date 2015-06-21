@@ -9,23 +9,28 @@ import thor.thor.character.Thor;
 import thor.thor.ui.Manager;
 
 /**
- * Main logic of the game. Moves the characters.
+ * Main logic of the game.
  */
 public class Game extends Timer implements ActionListener {
 
-    private final Thor thor;
-    private final ArrayList<Obstacle> obstacles;
     private final Manager manager;
     private final CollisionDetector collisionDetector;
+
+    private final Thor thor;
+    private final ArrayList<Obstacle> obstacles;
+
     private int currentLocation;
     private int score;
 
-    public Game(Manager m) {
+    public Game(Manager man) {
         super(200, null);
+
+        this.manager = man;
+        this.collisionDetector = new CollisionDetector();
+
         this.thor = new Thor(50, 250);
         this.obstacles = new ArrayList<>();
-        this.manager = m;
-        this.collisionDetector = new CollisionDetector();
+
         this.currentLocation = 1;
         this.score = 0;
 
@@ -65,29 +70,18 @@ public class Game extends Timer implements ActionListener {
             this.obstacles.addAll(this.manager.getObstacleHandler().getAllObstacles());
 
             this.thor.gravityMove();
-            ArrayList<Obstacle> removableObstacles = new ArrayList<>();
 
-            for (Obstacle o : this.obstacles) {
-                if (collisionDetector.collided(thor, o)) {
-                    this.manager.stopTimers();
-                    gameOver();
-                } else if (collisionDetector.passedObstacles(thor, o)) {
-                    this.score += 1;
-                }
+            if (this.collisionDetector.checkCollisions(this.thor, this.obstacles)) {
+                this.manager.stopTimers();
+                gameOver();
             }
 
-            this.obstacles.removeAll(removableObstacles);
-            this.manager.getObstacleHandler().removeObstacles(removableObstacles);
-
-            this.manager.getDrawingPlatform().update();
         }
 
         if (this.thor.hitTheGround()) {
             this.manager.stopTimers();
             gameOver();
         }
-
-        this.manager.getDrawingPlatform().update();
 
     }
 

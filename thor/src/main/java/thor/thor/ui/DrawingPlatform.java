@@ -20,6 +20,7 @@ import thor.thor.ui.listeners.PlayButtonListener;
  */
 public class DrawingPlatform extends JPanel {
 
+    private final Manager manager;
     private final Game game;
 
     private static final String firstpage = "Images/flyingthor2.jpg";
@@ -33,10 +34,11 @@ public class DrawingPlatform extends JPanel {
     private final JLabel firstPagePic;
     private final InfoPanel infoPanel;
 
-    public DrawingPlatform(Game game) {
+    public DrawingPlatform(Manager manager) {
         super.setSize(600, 600);
         super.setLayout(new BorderLayout());
-        this.game = game;
+        this.manager = manager;
+        this.game = this.manager.getGame();
 
         /*Background pictures*/
         this.pic = null;

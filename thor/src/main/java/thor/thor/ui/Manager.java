@@ -21,7 +21,7 @@ public class Manager {
         this.userInterface = ui;
 
         this.game = new Game(this);
-        this.drawingPlatform = new DrawingPlatform(this.game);
+        this.drawingPlatform = new DrawingPlatform(this);
         this.obstacleHandler = new ObstacleHandler();
         this.obstacleMover = new ObstacleMover(this);
         this.updater = new Updater(this);

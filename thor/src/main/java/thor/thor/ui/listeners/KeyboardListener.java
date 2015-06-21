@@ -20,9 +20,7 @@ public class KeyboardListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("KENGURU");
         if (e.getKeyCode() == KeyEvent.VK_UP) {
-            System.out.println("KALAKISSA");
             this.thor.move();
         }
     }

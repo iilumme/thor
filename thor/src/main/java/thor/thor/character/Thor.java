@@ -26,11 +26,11 @@ public class Thor {
     }
 
     public void move() {
-        this.y -= 10;
+        this.y -= 30;
     }
 
     public void gravityMove() {
-        this.y += 10;
+        this.y += 20;
     }
 
     public boolean hitTheGround() {
