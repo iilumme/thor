@@ -8,8 +8,7 @@ import thor.thor.ui.Manager;
 /**
  * Listener for keyboard (UP-arrow).
  */
-
-public class KeyboardListener implements KeyListener{
+public class KeyboardListener implements KeyListener {
 
     private final Manager manager;
     private final Thor thor;
@@ -18,28 +17,25 @@ public class KeyboardListener implements KeyListener{
         this.manager = m;
         this.thor = this.manager.getThor();
     }
-    
+
     @Override
     public void keyPressed(KeyEvent e) {
         System.out.println("KENGURU");
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             System.out.println("KALAKISSA");
             this.thor.move();
-            this.manager.getDrawingPlatform().update();
         }
     }
-    
-    
-    //NOT USED
 
+    /*Won't be used*/
     @Override
     public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported.");
+       
     }
-    
+
     @Override
     public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported.");
+        
     }
-    
+
 }

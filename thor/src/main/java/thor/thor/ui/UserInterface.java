@@ -7,7 +7,6 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import thor.thor.logic.Game;
 import thor.thor.ui.listeners.KeyboardListener;
 import thor.thor.ui.listeners.PlayButtonListener;
 
@@ -16,25 +15,28 @@ import thor.thor.ui.listeners.PlayButtonListener;
  */
 public class UserInterface implements Runnable {
 
+    private static final int WIDTH = 1200;
+    private static final int HEIGHT = 600;
+
     private JFrame frame;
-    private Game game;
-    private DrawingPlatform drawingPlatform;
-    private Manager manager;
+    private final Manager manager;
     private JButton play;
 
     public UserInterface() {
-        this.game = new Game();
+        this.manager = new Manager(this);
     }
 
     @Override
     public void run() {
 
         frame = new JFrame("Flying Thor");
-        frame.setPreferredSize(new Dimension(1200, 600));
+        frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         createComponents(frame.getContentPane());
+        frame.setFocusable(true);
+        frame.addKeyListener(new KeyboardListener(this.manager));
 
         frame.pack();
         frame.setVisible(true);
@@ -46,18 +48,11 @@ public class UserInterface implements Runnable {
         c.setLayout(new BorderLayout());
         c.setBackground(new Color(0, 128, 255));
 
-        this.drawingPlatform = new DrawingPlatform(this.game);
-        this.manager = new Manager(this.game, this.drawingPlatform, this);
-        this.game.setManager(this.manager);
-
-        KeyboardListener kl = new KeyboardListener(this.manager);
-        frame.addKeyListener(kl);
-
         this.play = new JButton("PLAY");
-        play.addActionListener(new PlayButtonListener(this.manager));
+        this.play.addActionListener(new PlayButtonListener(this.manager));
 
-        c.add(this.drawingPlatform, BorderLayout.CENTER);
-        c.add(play, BorderLayout.SOUTH);
+        c.add(this.manager.getDrawingPlatform(), BorderLayout.CENTER);
+        c.add(this.play, BorderLayout.SOUTH);
 
     }
 

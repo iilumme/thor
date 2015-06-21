@@ -10,40 +10,38 @@ import thor.thor.logic.ObstacleMover;
  */
 public class Manager {
 
+    private final UserInterface userInterface;
     private final Game game;
     private final DrawingPlatform drawingPlatform;
-    private final UserInterface userInterface;
     private final ObstacleHandler obstacleHandler;
     private final ObstacleMover obstacleMover;
     private final Updater updater;
 
-    public Manager(Game g, DrawingPlatform d, UserInterface ui) {
-        this.game = g;
-        this.drawingPlatform = d;
+    public Manager(UserInterface ui) {
         this.userInterface = ui;
+
+        this.game = new Game(this);
+        this.drawingPlatform = new DrawingPlatform(this.game);
         this.obstacleHandler = new ObstacleHandler();
         this.obstacleMover = new ObstacleMover(this);
         this.updater = new Updater(this);
-    }
 
-    public Game getGame() {
-        return this.game;
-    }
-
-    public DrawingPlatform getDrawingPlatform() {
-        return this.drawingPlatform;
     }
 
     public UserInterface getUserInterface() {
-        return this.userInterface;
+        return userInterface;
     }
 
-    public Thor getThor() {
-        return this.game.getThor();
+    public Game getGame() {
+        return game;
+    }
+
+    public DrawingPlatform getDrawingPlatform() {
+        return drawingPlatform;
     }
 
     public ObstacleHandler getObstacleHandler() {
-        return this.obstacleHandler;
+        return obstacleHandler;
     }
 
     public ObstacleMover getObstacleMover() {
@@ -53,7 +51,18 @@ public class Manager {
     public Updater getUpdater() {
         return updater;
     }
-    
+
+    public Thor getThor() {
+        return game.getThor();
+    }
+
+    public void startTimers() {
+        this.game.start();
+        this.updater.start();
+        this.obstacleHandler.start();
+        this.obstacleMover.start();
+    }
+
     public void stopTimers() {
         this.game.stop();
         this.updater.stopTimer();

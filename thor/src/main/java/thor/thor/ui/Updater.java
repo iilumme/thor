@@ -7,7 +7,6 @@ import javax.swing.Timer;
 /**
  * Updates DrawingPlatform.
  */
-
 public class Updater extends Thread {
 
     private final Timer timer;
@@ -29,7 +28,7 @@ public class Updater extends Thread {
     public void run() {
         this.timer.start();
     }
-    
+
     public void stopTimer() {
         this.timer.stop();
     }

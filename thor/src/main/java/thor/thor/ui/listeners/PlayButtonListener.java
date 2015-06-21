@@ -18,10 +18,7 @@ public class PlayButtonListener implements ActionListener {
         this.manager.getDrawingPlatform().changeToAsgard();
         this.manager.getUserInterface().playSetVisibleFalse();
         this.manager.getDrawingPlatform().setInfoPanelVisible();
-        this.manager.getGame().start();
-        this.manager.getUpdater().start();
-        this.manager.getObstacleHandler().start();
-        this.manager.getObstacleMover().start();
+        this.manager.startTimers();
     }
 
 }

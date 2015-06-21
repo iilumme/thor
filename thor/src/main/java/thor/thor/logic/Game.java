@@ -15,15 +15,16 @@ public class Game extends Timer implements ActionListener {
 
     private final Thor thor;
     private final ArrayList<Obstacle> obstacles;
-    private Manager manager;
+    private final Manager manager;
     private final CollisionDetector collisionDetector;
     private int currentLocation;
     private int score;
 
-    public Game() {
+    public Game(Manager m) {
         super(200, null);
         this.thor = new Thor(50, 250);
         this.obstacles = new ArrayList<>();
+        this.manager = m;
         this.collisionDetector = new CollisionDetector();
         this.currentLocation = 1;
         this.score = 0;
@@ -56,10 +57,6 @@ public class Game extends Timer implements ActionListener {
         return this.obstacles;
     }
 
-    public void setManager(Manager m) {
-        this.manager = m;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -67,7 +64,7 @@ public class Game extends Timer implements ActionListener {
 
             this.obstacles.addAll(this.manager.getObstacleHandler().getAllObstacles());
 
-            //this.thor.gravityMove();
+            this.thor.gravityMove();
             ArrayList<Obstacle> removableObstacles = new ArrayList<>();
 
             for (Obstacle o : this.obstacles) {
